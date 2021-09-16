@@ -1,0 +1,146 @@
+
+/* Base-Plus-Minus (B+M) is a relative & agnostic design token naming-convention I invented to create a scalable and systematic way of naming things, and actually remembering them, that is simple, straight-forward and strong for the long run. 
+Need more contrast/size/value from the base? Base plus one. Need less? Base minus one. No smelly t-shirt sizes; fresh, minimal and uniform scaling from a single point of reference; The Base. 
+
+TLDR: It's a utility in itself for designing utility-based design tokens if you will. Designed & Developed in isolation by vangu.us
+/*
+Simple base rules: NO-MORE-THAN-THREE rules, and how to write B+M out;
+
+- no more then ONE LINE to form a rule for the system, and THREE to explain it in an example.
+[example] 
+no more then ONE LINE to form a rule for the systems, and THREE to explain it in an example. This is a good rule of thumb to not create overseer-bias because we are "software engineers". We are copy-writers translating a message from design to code, from now into the infinite future. There's people there who will read this and they are there now, we are here now, so keep it simple. People from the future are far more stupid then they think.
+
+- no more then three letters to form a string
+[example] 
+--ucw means utility-color-warning and describes it role in the system; a utility (base) named color (variant) used for the case warning (case). In short it describes it's tokenized role in an easy to read & write way of fleshing it out, verbose in documentation or in shortcode, so a dependency is kept by simply memorizing it's first letters once you know what it does.
+
+- no more then THREE abrreviated strings as a string
+?[examples] 
+--bc1-bp1--ALT is the EDGE-case of; base: baction-color--1, variant: base-plus--1, case: ALT-ernative, CAPS (edge)
+--bc1-bp1--text is the text-case of; base: baction-color--1, variant: base-plus--1, case: text, lowercased (normal)
+
+This rule of three is evident in many programming languages, but also keeps things well isolated by relational dependency and systematical ordening and structuring using the same structural language. 
+
+The simple premise of writing out B+M is this; You start with a base, than a variant, than a case to apply it too. Edges come rarely, and at the end.
+
+[examples] 
+--base-variant--case--EDGE
+--base-variant
+--base--case
+--base 
+
+Note that a case and an edge always have two en-dashes prepending for easy reading.
+
+- LAST RULE: The Edge
+ sometimes you need to break the rules and use a fourth character, or a string, to make up a string that is more clear to communicate. Think like NIKE and Just Do it. That's what this system is for, speed and consistency of communication. 
+ ! But ONLY ONE extra character! No more! And no more than one 4-character word per stringed token, keep it simple.
+ ?[examples]
+ --bc1--text
+ --ucw--a11y
+ ! this is NOT good, too much word stringing, entrapment of usage, unclear to read)
+ --bc2--name-bp2--ALT
+ ! this is also good, identification by variant at the end, easier to change by appending variant
+ --bc2--icon-bm1 
+ ! this is Better imo, identification by usage at the end, easier to spot and process in code by appending usage of (edge) application
+ --bc2-bm1--icon--ALT
+
+ Whatever way you choose, stick with it. It's the base for everything else in your communication to others, the thing you often forget, including your future self.
+
+*/
+
+/* Naming your "design tokens" RELATIVE to a base is uniform throughout, and should provide a solid base for scaling up projects and the people included in it's pattern language before and afterhand. Old or new projects alike, like a SOLID & DRY encoding of OUR UNDER-standing.*/
+
+/*
+Brand-Action-Color--1 is reduced to Baction-Color--1, which in shortcode is --bc1. Brand Color is used more publicly so it doesn't conflict with naming or seeing it like that. I just like to see it's function in it's name, it's an action color for the brand used in specific circomstances. Therefore in writing it must be an actionable color too, like this is the primary brand action color. Why is it often brand-color-1 and then explained what it does in documentation, what does it's token do or mean? It's too long, so we shorten it and explain it with a doc. 
+
+That's like a first-name; a quick word of image, a reference, not appliance. So to me design tokens can quickly lose meaning if you do not "see them" applied, and you're back in the documentation to find out what it actually means and where to apply them. Beats the basic point of tokens; a utility of consistency in communication & application. So as a quirky but consistent word of image and token, baction became the choice for documentation and code because for me it makes it sound clear, and for others it is instantly once familiar with it.
+*/
+
+:root {
+    /* brand action Color 1*/
+    --bc1-bp1: ; 
+    --bc1: ; 
+    --bc1-base: (var(--bc1); 
+    --bc1-bm1: ; 
+    --bc1-text: ; 
+    
+    /* baction Color 2*/
+    --bc2-bp1: ; 
+    
+    /* -bp1 is shorthand for -base-plus-1, +1 step higher than the base, pre-pended with an 'en-dash'*/
+    --bc2: ; 
+    --bc2-base: (var(--bc2));
+    --bc1-text: ; 
+    /* --bc2 is shorthand for the base of --baction-color-2, with or without -base added, since it IS The Base by default in any case. But some like it consistently applied systematically for tooling & maintenance afterwords; without the -base appending, you can't look for a generic key. 
+    It is also very well possible to keep them both, and just nest the variables for easier reference as a loop to provide both styles in your code without it breaking anyone's flow of applied thought, or proces afterwards.*/
+
+    --bc2-bm1: #123100; 
+    
+    /* -bm1 is shorthand for -base-minus-1, -1 step lower than the base*/
+    --bc2-bm2: #123123; 
+    
+    /* need a 2nd? Just add another case to the ladder! */
+    --bc2-bm3: #123150; 
+    
+    /* ...and so on, untill... There's already a base occupied where you need one! You have an in-between! */
+    
+    /* Well, Refactor it later and just add '_ALT' to a base (not THE base), but only ONE! (no numbering needed that way). Also you need to attach it to the right color by simply looking to it's adjecent color and seeing lighter or darker. */
+    --bc2-bm3_ALT: #123160 ; 
+    /*In this case it's darker so it belongs to -bm3. If it were to be lighter it's appending would belong to -bm2 as it would be lower than -bm2, but above -bm3. Same on the plus side of the ramp. Another way to "pick a parent" for an ALT-token it is to say "whichever is closest to the base wins".*/
+
+    /* B+M is designed for leggibility & familiarity, except these very long comments, especially the UGLY CODE for easy spotting & maintenance. ALT-ernatives are _pre-pended with an '_UNDERSCORE' and highlighted with all CAPS for easy headshots when doing a "review safari" through someone else's mind-jungle*/
+    
+    /* in theory you could go up or down +99 and -99 plus 99 _ALT's on both sides (396 variants), with one convention that is only 3, 7 or 11 characters long, give or take plus or minus two. But since most use around 3~9 colors (plus or minus two), three layers per color is more than enough for most to start with, and Miller's Law predicts most people will need three, fiver or seven things more, plus or minus two. 
+    
+    So that's three colors, three shades, Nine colors to manage, plus the defaults white, black and greys, another nine colors, adding up to 18 in total, plus three utility colors, adding up to 21 in total, +1 for me is 22, my favorite number.
+    
+    So this systematical way of naming tokens with B+M gives way to writing up simple rules for using linguistics in your code-language that presentationally enhance your code internally, as well as deleting entries into the system with gracefull decay if they don't apply or adhere to specs of the future. Just like any other open specification really; open, strict and hybridly applied by all according to one's own needs at hand to write a better language that explains what they do with it.*/
+    
+    /* baction Color 3*/
+    --bc3-bp1: ; 
+    --bc3: ; 
+    --bc3_bm1: ; 
+     
+    
+    /* ___UTILITY colors, system colors*/
+    --ucw: ; 
+    
+    /* utility-color-warning*/
+    --ucs: ; 
+    
+    /* utility-color-succes*/
+    --uce: ; 
+    
+    /* utility-color-error*/
+    
+    
+    /* __GLOBAL colors, application colors */
+    --fgc-l: black; 
+    --fgc-d: white; 
+    --fgc: (var(--fgc-l));
+    
+    /* foreground-color-light*/
+    --mgc-l: #4B5563; 
+    --mgc-d: #4B5563; 
+    --mgc: (var(--mgc-l));
+    
+    /* midground-color-light*/
+    --bgc-l: white; 
+    --bgc-d:black; 
+    --bgc: (var(--bgc-l))
+    
+    /* background-color-light*/
+    
+    
+    /* foreground-color-dark*/
+    
+    
+    /* midground-color-dark*/
+    
+    
+    /* background-color-dark*/
+    }
+    
+    /* The perceptual relative naming of B+M shows what code is familiar and consistent from docs to code. Plus, maintenance is your friend; all test use the same BASE logical operations so extending it in your code is easy. */
+    
+    
